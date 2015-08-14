@@ -10,37 +10,39 @@
 </head>
 <body>
 
-  <div class="container">
-    <div id="tasks">
-      <div v-if="remaining.length">
-        <h1>Tasks - ({{remaining.length}})</h1>
-        <ol class="list-group">
-          <li v-repeat="task: tasks | inProcess" class="list-group-item">
-            <span v-on="dblclick: editTask(task)">{{task.body}}</span>
-            <button v-on="click: removeTask(task)">&#10007;</button>
-            <button v-on="click: toggleTaskCompletion(task)">&#10004;</button>
-          </li>
-        </ol>
-      </div>
+  <div id="tasks" class="container">
+    <div v-if="remaining.length">
+      <h1>Tasks - ({{remaining.length}})</h1>
+      <ol class="list-group">
+        <li v-repeat="task: tasks | inProcess" class="list-group-item">
+          <span v-on="dblclick: editTask(task)">{{task.body}}</span>
+          <button v-on="click: removeTask(task)">&#10007;</button>
+          <button v-on="click: toggleTaskCompletion(task)">&#10004;</button>
+        </li>
+      </ol>
+    </div>
 
-      <form v-on="submit: addTask">
-        <div class="form-group">
-          <input v-el="newTask" v-model="newTask" class="form-control" placeholder="I need to ..."/>
-        </div>
-        <button class="btn btn-primary">Add Task</button>
-        <button v-on="click: completeAll" class="btn btn-default">Mark All As Completed?</button>
-      </form>
-
-      <div v-if="completions.length">
-        <h3>Completed - ({{completions.length}})</h3>
-        <ol class="list-group">
-          <li v-repeat="task: tasks | filterBy true in completed" class="list-group-item">
-            {{task.body}}
-            <button v-on="click: toggleTaskCompletion(task)">&#10007;</button>
-          </li>
-        </ol>
-        <button v-on="click: clearCompleted" class="btn btn-danger">Clear Completed</button>
+    <form v-on="submit: addTask">
+      <div class="form-group">
+        <input v-el="newTask" v-model="newTask" class="form-control" placeholder="I need to ..."/>
       </div>
+      <button class="btn btn-primary">Add Task</button>
+      <button v-on="click: completeAll" class="btn btn-default">Mark All As Completed?</button>
+    </form>
+
+    <div v-if="completions.length">
+      <h3>Completed - ({{completions.length}})</h3>
+      <ol class="list-group">
+        <li v-repeat="task: tasks | filterBy true in completed" class="list-group-item">
+          {{task.body}}
+          <button v-on="click: toggleTaskCompletion(task)">&#10007;</button>
+        </li>
+      </ol>
+      <button v-on="click: clearCompleted" class="btn btn-danger">Clear Completed</button>
+    </div>
+
+    <div class="debug">
+      <pre>{{$data | json}}</pre>
     </div>
   </div>
 

@@ -10,3 +10,6 @@ li button {
   float: right;
   margin-left: 10px;
 }
+.debug {
+  margin: 2em 0;
+}
